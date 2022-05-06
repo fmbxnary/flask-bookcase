@@ -1,0 +1,127 @@
+{% extends 'site/base.html '%}
+{% block title %}Details{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <form method="POST">
+        <div class="row justify-content-center ">
+            <div class="col-auto mb-3 gx-2">
+                <div class="card mx-auto" style="width: 12rem;">
+                    <img src="{{ book['img'] }}" class="card-img-top" alt="..." width="200" height="270">
+                </div>
+            </div>
+            <div class="col-lg-6 gx-2">
+                <div class="card mx-auto border-danger mb-3" style="max-width: 45rem;">
+                    <div class="card-header">
+                        <div class="d-grid gap-2">
+                            {% if added == False %}
+                            <button class="btn btn-primary" type="submit">Add to library</button>
+                            {% else %}
+                            <button class="btn btn-danger" type="submit">Remove</button>
+                            {% endif %}
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                data-bs-target="#commentModal">
+                                Add comment
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body text-danger">
+                        <ul class="list-group list-group-flush text-center">
+                            <li class="list-group-item disabled">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">ISBN</span>
+                                    <input type="text" class="form-control" aria-label="Sizing example input"
+                                        aria-describedby="inputGroup-sizing-sm" placeholder="{{ book['isbn'] }}">
+                                </div>
+                            </li>
+                            <li class="list-group-item disabled">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">TITLE</span>
+                                    <input type="text" class="form-control" aria-label="Sizing example input"
+                                        aria-describedby="inputGroup-sizing-sm" placeholder="{{ book['title'] }}">
+                                </div>
+                            </li>
+                            <li class="list-group-item disabled">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">AUTHOR</span>
+                                    <input type="text" class="form-control" aria-label="Sizing example input"
+                                        aria-describedby="inputGroup-sizing-sm" placeholder="{{ book['author'] }}">
+                                </div>
+                            </li>
+                            <li class="list-group-item disabled">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">PAGE</span>
+                                    <input type="text" class="form-control" aria-label="Sizing example input"
+                                        aria-describedby="inputGroup-sizing-sm" placeholder="{{ book['page'] }}">
+                                </div>
+                            </li>
+                            <li class="list-group-item disabled">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Average Rating</span>
+                                    <input type="text" class="form-control" aria-label="Sizing example input"
+                                        aria-describedby="inputGroup-sizing-sm" placeholder="{{ book['rate'] }}">
+                                </div>
+                            </li>
+                            <li class="list-group-item ">
+                                <div class="card">
+                                    <div class="card-header" id="inputGroup-sizing">
+                                        Description
+                                    </div>
+                                    <div class="card-body">
+                                        <p>{{ book['desc'] }}</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+    </form>
+</div>
+<div class="container mb-5">
+    <div class="row">
+        <div class="my-3 p-3 bg-body rounded shadow-lg">
+            <h6 class="border-bottom pb-2 mb-0">Comments</h6>
+
+            {% for comment in comments %}
+            <div class="d-flex text-muted pt-3  border-bottom ">
+                <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32">
+                    <rect width="100%" height="100%" fill="#ff8000"></rect>
+                </svg>
+                <p class="pb-3 mb-0 small lh-sm">
+                    <strong class="d-block text-gray-dark">@{{ comment[1] }}</strong>
+                     {{ comment[0] }}
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Comment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="/comment">
+                    <div class="input-group">
+                        <textarea class="form-control" name="comment" aria-label="With textarea"></textarea>
+                        <textarea class="visually-hidden" name="bookid"
+                            aria-label="With textarea">{{ book['id'] }}</textarea>
+                        <textarea class="visually-hidden" name="gid"
+                            aria-label="With textarea">{{ book['bookid'] }}</textarea>
+                    </div>
+                    <div class="d-flex justify-content-center text-center mt-3"><button type="submit"
+                            class="btn btn-primary">Add
+                            comment</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'site/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row ">
+        {% for book in books %}
+        <div class="col-auto d-flex align-items-center ">
+            <div class="card" id="searchCard" style="width: 12rem;">
+                <img src="{{ book['BookImg'] }}" class="card-img-top" alt="..." width="200" height="270">
+                <div class="card-body">
+                    <h6 class="card-title text-center">
+                        {{ book['BookTitle'] }}
+                    </h6>
+                    <p class="card-text"></p>
+                    <a href="/details/{{ book['BookID'] }}" class="stretched-link"></a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
