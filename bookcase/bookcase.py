@@ -75,7 +75,7 @@ def profile(id):
         " INNER JOIN reads"
         " ON book.id=reads.book_id"
         " WHERE reads.user_id=(?)"
-        " ORDER BY book.id DESC LIMIT 1",
+        " ORDER BY reads.id DESC LIMIT 1",
         (id,)).fetchone()
 
     # return book count
