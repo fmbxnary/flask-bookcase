@@ -78,11 +78,17 @@ def profile(id):
         " ORDER BY book.id DESC LIMIT 1",
         (id,)).fetchone()
 
+    # return book count
+    book_count =  db.execute(
+        "SELECT * FROM reads"
+        " WHERE user_id=(?)",
+        (id),).fetchall()
+
     # return user from the database by given id
     user = db.execute(
         "SELECT * FROM user WHERE id=(?)", (id,)).fetchone()
 
-    return render_template('site/profile.html', user=user, last_book=last_book)
+    return render_template('site/profile.html', user=user, last_book=last_book, book_count=len(book_count))
 
 
 @bp.route('/search', methods=('GET', 'POST'))
