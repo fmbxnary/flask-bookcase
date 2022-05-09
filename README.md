@@ -20,9 +20,9 @@ Bookcase is a flask based web application which uses SQLite, Bootstrap and Googl
     $ export FLASK_DEBUG=1
     
 #### For Windows
-    $ flask init-db
-    $ set FLASK_APP=bookcase
-    $ set FLASK_DEBUG=1
+    >_ flask init-db
+    >_ set FLASK_APP=bookcase
+    >_ set FLASK_DEBUG=1
     
 ## Running
     $ flask run
