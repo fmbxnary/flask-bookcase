@@ -11,7 +11,7 @@ Bookcase is a flask based web application which uses SQLite, Bootstrap and Googl
         
 ## Requirements
     $ python -m venv venv
-    $ cd venv/bin/activate
+    $ venv/Scripts/activate
     $ pip install -r requirements.txt
     
 ## Environment
